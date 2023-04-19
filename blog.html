@@ -1,0 +1,57 @@
+<!-- Бесполезный блок, по возможности удалить -->
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+ <meta charset="UTF-8"> 
+ <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ <title>Document</title> 
+</head> 
+ 
+<body style="height:2000px"> 
+ <main> 
+ <h1>SWAPI page</h1> 
+ <div class="posts"></div> 
+ </main> 
+ 
+ <style> 
+ main { 
+ margin: 0 auto; 
+ max-width: 600px; 
+ } 
+ 
+ .post { 
+ max-width: 600px; 
+ border-radius: 10px; 
+ border: 1px solid #000; 
+ padding: 10px; 
+ margin: 20px 0; 
+ box-shadow: 8px 9px 0px -3px #000; 
+ } 
+ </style>
+ <script> 
+ const posts = document.querySelector('.posts') 
+ const renderPost = (post) => { 
+ const postDiv = document.createElement('div') 
+ postDiv.classList.add('post') 
+ postDiv.innerHTML = ` 
+ <h2>${post.title}</h2> 
+ <p>${post.body}</p> `
+  
+ posts.append(postDiv) 
+ } 
+ 
+ const loadPosts = async () => { 
+ const posts = fetch('https://swapi.dev/api/films%27') 
+ .then(response => response.json()) 
+ .then(result => { 
+ result.map(post => renderPost(post)) 
+ }) 
+ } 
+ 
+ loadPosts() 
+ 
+ </script> 
+</body> 
+</html>
